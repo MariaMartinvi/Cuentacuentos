@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import StoryForm from '../StoryForm';
 import StoryDisplay from '../StoryDisplay';
 import '../../styles/global.css';
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8916688102365664"
-     crossorigin="anonymous"></script>
+
+
+
 function HomePage() {
   const [generatedStory, setGeneratedStory] = useState(null);
 
@@ -47,11 +48,6 @@ function HomePage() {
                 <p>Cada historia generada es completamente única y original, adaptada a tus preferencias.</p>
               </div>
 
-              <div className="feature-card">
-                <div className="feature-icon">🎭</div>
-                <h3>Múltiples Géneros</h3>
-                <p>Elige entre diversos géneros: original, clásico, humor, ciencia ficción, terror y más.</p>
-              </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🔊</div>

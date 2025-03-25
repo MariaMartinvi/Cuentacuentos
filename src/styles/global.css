@@ -109,7 +109,7 @@ a {
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  padding: 5rem 1.5rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   color: white;
   position: relative;
@@ -128,9 +128,10 @@ a {
 }
 
 .hero-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
+  max-width: 1000px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el contenedor */
+  text-align: center; /* Centra el texto */
+  padding: 1rem; /* Agrega algo de espacio interno */
 }
 
 .hero-section h1 {
