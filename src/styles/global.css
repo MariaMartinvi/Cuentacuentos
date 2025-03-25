@@ -903,10 +903,11 @@ button {
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   padding: 2rem;
-  margin-bottom: 3rem;
+  margin: 1rem auto;
   border: 1px solid #f1f3f5;
-  transform: translateY(-30px);
-  max-width: 100%; /* Ensure it takes full width on mobile */
+  max-width: 600px; /* Limit width for larger screens */
+  width: 100%; /* Ensure it takes full width on mobile */
+  box-sizing: border-box;
 }
 
 /* Title styling */
@@ -919,12 +920,9 @@ button {
 
 /* Form styling */
 .story-form {
-  max-width: 600px; /* Limit the width for larger screens */
-  margin: 0 auto; /* Center the form */
-  padding: 1rem;
-  background-color: #f9f9f9; /* Light background for contrast */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  flex-direction: column; /* Stack all elements vertically */
+  gap: 1rem; /* Add spacing between form elements */
 }
 
 /* Input and select styles */
@@ -932,7 +930,6 @@ button {
 .story-form select {
   width: 100%; /* Full width for inputs and selects */
   padding: 0.85rem;
-  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
@@ -964,12 +961,12 @@ button {
 
 /* Form group styling */
 .form-group {
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  gap: 0.5rem; /* Add spacing between label and input */
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--text);
   font-size: 0.95rem;
@@ -981,10 +978,6 @@ label {
     padding: 1.5rem; /* Adjust padding for smaller screens */
   }
 
-  .story-form {
-    padding: 1rem; /* Adjust padding for smaller screens */
-  }
-
   .story-form input,
   .story-form select {
     font-size: 0.9rem; /* Slightly smaller font size */
@@ -993,9 +986,21 @@ label {
   .story-form button {
     font-size: 0.9rem; /* Adjust button font size */
   }
+}
 
-  .form-row {
-    flex-direction: column; /* Stack form rows vertically */
-    gap: 1rem;
+@media (max-width: 480px) {
+  .story-form-container {
+    padding: 1rem; /* Reduce padding for very small screens */
+  }
+
+  .story-form input,
+  .story-form select {
+    font-size: 0.85rem; /* Smaller font size for inputs */
+    padding: 0.7rem; /* Adjust padding for smaller inputs */
+  }
+
+  .story-form button {
+    font-size: 0.85rem; /* Adjust button font size */
+    padding: 0.7rem; /* Adjust button padding */
   }
 }

@@ -47,12 +47,12 @@ function StoryForm({ onStoryGenerated }) {
   };
 
   return (
-    <div className="story-form">
+    <div className="story-form-container">
       <h2>
         <span className="icon-title">🦉</span>
         Mi Cuenta Cuentos
       </h2>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit} className="story-form">
         <div className="form-group">
           <label htmlFor="topic">
             <span className="form-icon">📝</span> Introduce un tema
