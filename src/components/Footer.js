@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -22,25 +23,20 @@ function Footer() {
           <div className="footer-section">
             <h3>Enlaces Rápidos</h3>
             <ul className="footer-links">
-            <a href="/inicio">Inicio</a>
+          
             <a href="/como-funciona">Cómo Funciona</a>
-            <a href="/ejemplos">Ejemplos</a>
-            <a href="/preguntas-frecuentes">Preguntas Frecuentes</a>
             <a href="/terminos-y-condiciones">Términos y Condiciones</a>
             <a href="/politica-de-privacidad">Política de Privacidad</a>
             </ul>
           </div>
 
-          <div className="footer-section">
-            <h3>Herramientas Relacionadas</h3>
-        
-          </div>
+
         </div>
 
         <div className="footer-bottom">
           <p>&copy; {currentYear} Generador de Cuentos IA. Todos los derechos reservados.</p>
           <div className="made-with">
-            Hecho con <span className="heart">❤️</span> en España
+            Hecho con <span className="heart">❤️</span> en Barcelona
           </div>
         </div>
       </div>

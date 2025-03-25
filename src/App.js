@@ -1,73 +1,41 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import StoryForm from './components/StoryForm';
-import StoryDisplay from './components/StoryDisplay';
-import './styles/global.css';
+import HomePage from './components/pages/HomePage';
+import AboutPage from './components/pages/AboutPage';
+import ServicesPage from './components/pages/ServicesPage';
+import ContactPage from './components/pages/ContactPage';
+import InicioPage from './components/pages/InicioPage';
+import ComoFuncionaPage from './components/pages/ComoFuncionaPage';
+import TerminosPage from './components/pages/TerminosPage';
+import PoliticaPage from './components/pages/PoliticaPage';
 
 function App() {
   const [generatedStory, setGeneratedStory] = useState(null);
 
   const handleStoryGenerated = (story) => {
     setGeneratedStory(story);
-
-    // Scroll to story if generated
-    if (story) {
-      setTimeout(() => {
-        const storyDisplay = document.querySelector('.story-display');
-        if (storyDisplay) {
-          storyDisplay.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
+    console.log('Historia generada:', story);
   };
 
   return (
-    <div className="app">
-      <Navbar />
-
-      <div className="hero-section">
-        <div className="hero-container">
-         <h1>Niñoooos....¡a dormir!</h1>
-          <p> Crea audiocuentos personalizados y originales en español con solo un clic para a ir a dormir y dale al play. Personaliza el tema con sus historias del día y del cole, el tipo, longitud y edad.</p>
-        </div>
+    <Router>
+      <div className="app">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage onStoryGenerated={handleStoryGenerated} />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/inicio" element={<InicioPage />} />
+          <Route path="/como-funciona" element={<ComoFuncionaPage />} />
+          <Route path="/terminos-y-condiciones" element={<TerminosPage />} />
+          <Route path="/politica-de-privacidad" element={<PoliticaPage />} />
+        </Routes>
+        <Footer />
       </div>
-
-      <main className="container">
-        <StoryForm onStoryGenerated={handleStoryGenerated} />
-
-        {generatedStory && (
-          <StoryDisplay story={generatedStory} />
-        )}
-
-        {!generatedStory && (
-          <div className="features-preview">
-            <h2>Características destacadas</h2>
-            <div className="features-grid">
-              <div className="feature-card">
-                <div className="feature-icon">✨</div>
-                <h3>Historias Únicas</h3>
-                <p>Cada historia generada es completamente única y original, adaptada a tus preferencias.</p>
-              </div>
-
-              <div className="feature-card">
-                <div className="feature-icon">🎭</div>
-                <h3>Múltiples Géneros</h3>
-                <p>Elige entre diversos géneros: original, clásico, humor, ciencia ficción, terror y más.</p>
-              </div>
-
-              <div className="feature-card">
-                <div className="feature-icon">🔊</div>
-                <h3>Conversión a Audio</h3>
-                <p>Escucha tus historias con nuestra función de texto a voz con voces naturales en español.</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
-
-      <Footer />
-    </div>
+    </Router>
   );
 }
 

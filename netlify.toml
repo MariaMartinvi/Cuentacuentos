@@ -2,8 +2,7 @@
   publish = "build"
   functions = "netlify/functions"
 
-[dev]
-  framework = "create-react-app"
-  targetPort = 3001  # Cambia esto a un puerto diferente
-  port = 8888        # Este es el puerto que Netlify Dev usará
-  functions = "netlify/functions"
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
