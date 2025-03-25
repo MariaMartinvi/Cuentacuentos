@@ -109,7 +109,7 @@ a {
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  padding: 2rem 1.5rem;
+  padding: 5rem 1.5rem;
   text-align: center;
   color: white;
   position: relative;
@@ -128,10 +128,9 @@ a {
 }
 
 .hero-container {
-  max-width: 800px; /* Limita el ancho máximo */
-  margin: 0 auto; /* Centra el contenedor */
-  text-align: center; /* Centra el texto */
-  padding: 1rem; /* Agrega algo de espacio interno */
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .hero-section h1 {
@@ -148,60 +147,7 @@ a {
   margin: 0 auto;
   font-weight: 400;
 }
-/* General styles for the StoryForm */
-.story-form {
-  max-width: 600px; /* Limit the width for larger screens */
-  margin: 0 auto; /* Center the form */
-  padding: 1rem; /* Add some padding */
-  background-color: #f9f9f9; /* Light background for contrast */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
 
-/* Input and textarea styles */
-.story-form input,
-.story-form textarea {
-  width: 100%; /* Full width for inputs */
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
-
-/* Button styles */
-.story-form button {
-  width: 100%; /* Full width for mobile */
-  padding: 0.75rem;
-  background-color: var(--primary); /* Use your primary color */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.story-form button:hover {
-  background-color: var(--primary-dark); /* Darker shade on hover */
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-  .story-form {
-    padding: 1rem; /* Adjust padding for smaller screens */
-  }
-
-  .story-form input,
-  .story-form textarea {
-    font-size: 0.9rem; /* Slightly smaller font size */
-  }
-
-  .story-form button {
-    font-size: 0.9rem; /* Adjust button font size */
-  }
-}
 /* Story Form */
 .story-form-container {
   background-color: white;
@@ -895,112 +841,4 @@ button {
   color: var(--text-light);
   line-height: 1.7;
   font-size: 1rem;
-}
-
-/* General styles for the StoryForm container */
-.story-form-container {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  padding: 2rem;
-  margin: 1rem auto;
-  border: 1px solid #f1f3f5;
-  max-width: 600px; /* Limit width for larger screens */
-  width: 100%; /* Ensure it takes full width on mobile */
-  box-sizing: border-box;
-}
-
-/* Title styling */
-.story-form-container h2 {
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-size: 1.8rem;
-}
-
-/* Form styling */
-.story-form {
-  display: flex;
-  flex-direction: column; /* Stack all elements vertically */
-  gap: 1rem; /* Add spacing between form elements */
-}
-
-/* Input and select styles */
-.story-form input,
-.story-form select {
-  width: 100%; /* Full width for inputs and selects */
-  padding: 0.85rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
-
-/* Placeholder styling */
-.story-form input::placeholder {
-  color: #adb5bd;
-  opacity: 0.8;
-}
-
-/* Button styles */
-.story-form button {
-  width: 100%; /* Full width for buttons */
-  padding: 0.85rem;
-  background-color: var(--primary); /* Use your primary color */
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.story-form button:hover {
-  background-color: var(--primary-dark); /* Darker shade on hover */
-}
-
-/* Form group styling */
-.form-group {
-  display: flex;
-  flex-direction: column; /* Stack label and input vertically */
-  gap: 0.5rem; /* Add spacing between label and input */
-}
-
-label {
-  font-weight: 600;
-  color: var(--text);
-  font-size: 0.95rem;
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-  .story-form-container {
-    padding: 1.5rem; /* Adjust padding for smaller screens */
-  }
-
-  .story-form input,
-  .story-form select {
-    font-size: 0.9rem; /* Slightly smaller font size */
-  }
-
-  .story-form button {
-    font-size: 0.9rem; /* Adjust button font size */
-  }
-}
-
-@media (max-width: 480px) {
-  .story-form-container {
-    padding: 1rem; /* Reduce padding for very small screens */
-  }
-
-  .story-form input,
-  .story-form select {
-    font-size: 0.85rem; /* Smaller font size for inputs */
-    padding: 0.7rem; /* Adjust padding for smaller inputs */
-  }
-
-  .story-form button {
-    font-size: 0.85rem; /* Adjust button font size */
-    padding: 0.7rem; /* Adjust button padding */
-  }
 }

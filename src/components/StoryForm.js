@@ -25,7 +25,7 @@ function StoryForm({ onStoryGenerated }) {
         length: storyLength,
         storyType,
         creativityLevel,
-        ageGroup
+        ageGroup,
       });
 
       onStoryGenerated(generatedStory);
@@ -52,7 +52,7 @@ function StoryForm({ onStoryGenerated }) {
         <span className="icon-title">🦉</span>
         Mi Cuenta Cuentos
       </h2>
-      <form onSubmit={handleSubmit} className="story-form">
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="topic">
             <span className="form-icon">📝</span> Introduce un tema
@@ -141,11 +141,7 @@ function StoryForm({ onStoryGenerated }) {
         </div>
 
         <div className="button-group">
-          <button
-            type="submit"
-            className="generate-btn"
-            disabled={isLoading}
-          >
+          <button type="submit" className="generate-btn" disabled={isLoading}>
             {isLoading ? (
               <>
                 <span className="spinner"></span> Generando...
@@ -156,11 +152,7 @@ function StoryForm({ onStoryGenerated }) {
               </>
             )}
           </button>
-          <button
-            type="button"
-            className="reset-btn"
-            onClick={handleReset}
-          >
+          <button type="button" className="reset-btn" onClick={handleReset}>
             Empezar de nuevo
           </button>
         </div>
