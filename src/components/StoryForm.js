@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { generateStory } from '../services/storyService1';
+import { generateStory } from '../services/storyService';
 
 function StoryForm({ onStoryGenerated }) {
   const [topic, setTopic] = useState('');

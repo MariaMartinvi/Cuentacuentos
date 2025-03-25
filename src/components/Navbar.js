@@ -9,10 +9,10 @@ function Navbar() {
           <a href="/">🦉 Mi Cuenta Cuentos</a>
         </div>
         <div className="nav-links">
-          <a href="#" className="nav-link">Inicio</a>
-          <a href="#" className="nav-link">Cómo Funciona</a>
-          <a href="#" className="nav-link">Ejemplos</a>
-          <a href="#" className="nav-link">FAQ</a>
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
         </div>
       </div>
     </nav>

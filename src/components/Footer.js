@@ -22,24 +22,18 @@ function Footer() {
           <div className="footer-section">
             <h3>Enlaces Rápidos</h3>
             <ul className="footer-links">
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Cómo Funciona</a></li>
-              <li><a href="#">Ejemplos</a></li>
-              <li><a href="#">Preguntas Frecuentes</a></li>
-              <li><a href="#">Términos y Condiciones</a></li>
-              <li><a href="#">Política de Privacidad</a></li>
+            <a href="/inicio">Inicio</a>
+            <a href="/como-funciona">Cómo Funciona</a>
+            <a href="/ejemplos">Ejemplos</a>
+            <a href="/preguntas-frecuentes">Preguntas Frecuentes</a>
+            <a href="/terminos-y-condiciones">Términos y Condiciones</a>
+            <a href="/politica-de-privacidad">Política de Privacidad</a>
             </ul>
           </div>
 
           <div className="footer-section">
             <h3>Herramientas Relacionadas</h3>
-            <ul className="footer-links">
-              <li><a href="#">Resumidor de Textos</a></li>
-              <li><a href="#">Parafrasear Textos</a></li>
-              <li><a href="#">Generador de Ensayos</a></li>
-              <li><a href="#">Generador de Frases</a></li>
-              <li><a href="#">Creador de Poemas</a></li>
-            </ul>
+        
           </div>
         </div>
 
