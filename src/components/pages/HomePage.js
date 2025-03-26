@@ -4,8 +4,7 @@ import StoryDisplay from '../StoryDisplay';
 import '../../styles/global.css';
 
 
-
-function HomePage() {
+function App() {
   const [generatedStory, setGeneratedStory] = useState(null);
 
   const handleStoryGenerated = (story) => {
@@ -24,19 +23,21 @@ function HomePage() {
 
   return (
     <div className="app">
+      
+
       <div className="hero-section">
         <div className="hero-container">
-          <h1>Niñoooos....¡a dormir!</h1>
-          <p>
-            Crea audiocuentos personalizados con solo un clic y dale al play. Personaliza el cuento con sus historias, sus amigos, el cole, ... y ¡a dormir!
-          </p>
+         <h1>Niñoooos....¡a dormir!</h1>
+          <p> Crea audiocuentos personalizados y originales en español con solo un clic para a ir a dormir y dale al play. Personaliza el tema con sus historias del día y del cole, el tipo, longitud y edad.</p>
         </div>
       </div>
 
       <main className="container">
         <StoryForm onStoryGenerated={handleStoryGenerated} />
 
-        {generatedStory && <StoryDisplay story={generatedStory} />}
+        {generatedStory && (
+          <StoryDisplay story={generatedStory} />
+        )}
 
         {!generatedStory && (
           <div className="features-preview">
@@ -48,6 +49,11 @@ function HomePage() {
                 <p>Cada historia generada es completamente única y original, adaptada a tus preferencias.</p>
               </div>
 
+              <div className="feature-card">
+                <div className="feature-icon">🎭</div>
+                <h3>Múltiples Géneros</h3>
+                <p>Elige entre diversos géneros: original, clásico, humor, ciencia ficción, terror y más.</p>
+              </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🔊</div>
@@ -58,8 +64,10 @@ function HomePage() {
           </div>
         )}
       </main>
+
+      
     </div>
   );
 }
 
-export default HomePage;
+export default App;
