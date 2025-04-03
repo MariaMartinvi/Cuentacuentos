@@ -1,39 +1,40 @@
-.terminos-page {
-    font-family: 'Arial', sans-serif;
-    color: var(--text-dark);
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
+.page-title {
+  font-size: 1.8rem; /* Reducido desde tu comentario "Smaller title" */
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
   .page-title {
-    font-size: 2.5rem;
-    color: var(--primary);
-    text-align: center;
-    margin-bottom: 2rem;
+    font-size: 1.4rem; /* Reducido desde 1.6rem */
   }
-  
-  .section {
-    margin-bottom: 2rem;
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.2rem; /* Reducido desde 1.4rem */
   }
-  
+}
+.section-title {
+  font-size: 1.4rem; /* Reducido desde tu comentario "Smaller section titles" */
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--light-gray);
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
   .section-title {
-    font-size: 1.8rem;
-    color: var(--primary-dark);
-    margin-bottom: 1rem;
+    font-size: 1.1rem; /* Reducido desde 1.3rem */
   }
-  
-  p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1rem; /* Reducido desde 1.2rem */
   }
-  
-  .list {
-    list-style: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .list li {
-    margin-bottom: 0.5rem;
-  }
+}

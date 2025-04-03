@@ -23,18 +23,15 @@ function Footer() {
           <div className="footer-section">
             <h3>Enlaces Rápidos</h3>
             <ul className="footer-links">
-          
-            <a href="/como-funciona">Cómo Funciona</a>
-            <a href="/terminos-y-condiciones">Términos y Condiciones</a>
-            <a href="/politica-de-privacidad">Política de Privacidad</a>
+              <li><a href="/como-funciona">Cómo Funciona</a></li>
+              <li><a href="/terminos-y-condiciones">Términos y Condiciones</a></li>
+              <li><a href="/politica-de-privacidad">Política de Privacidad</a></li>
             </ul>
           </div>
-
-
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Generador de Cuentos IA. Todos los derechos reservados.</p>
+          <p className="centered-text">© {currentYear} Generador de Cuentos IA. Todos los derechos reservados.</p>
           <div className="made-with">
             Hecho con <span className="heart">❤️</span> en Barcelona
           </div>

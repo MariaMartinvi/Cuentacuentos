@@ -82,6 +82,18 @@ function getGoogleVoiceDetails(voiceId) {
         languageCode: 'es-US',
         gender: 'FEMALE'
       };
+    case 'female-english':
+      return {
+        name: 'en-US-Standard-A',
+        languageCode: 'en-US',
+        gender: 'FEMALE'
+      };
+    case 'male-english':
+      return {
+        name: 'en-US-Standard-B',
+        languageCode: 'en-US',
+        gender: 'MALE'
+      };
     case 'male-latam':
       return {
         name: 'es-US-Standard-B',

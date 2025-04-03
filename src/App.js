@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import HomePage from './components/pages/HomePage';
-import AboutPage from './components/pages/AboutPage';
-import ServicesPage from './components/pages/ServicesPage';
-import ContactPage from './components/pages/ContactPage';
-import InicioPage from './components/pages/InicioPage';
-import ComoFuncionaPage from './components/pages/ComoFuncionaPage';
-import TerminosPage from './components/pages/TerminosPage';
-import PoliticaPage from './components/pages/PoliticaPage';
+import Navbar from './components/Navbar.js';
+import Footer from './components/Footer.js';
+import HomePage from './components/pages/HomePage.js';
+import AboutPage from './components/pages/AboutPage.js';
+import ServicesPage from './components/pages/ServicesPage.js';
+import ContactPage from './components/pages/ContactPage.js';
+import InicioPage from './components/pages/InicioPage.js';
+import ComoFuncionaPage from './components/pages/ComoFuncionaPage.js';
+import TerminosPage from './components/pages/TerminosPage.js';
+import PoliticaPage from './components/pages/PoliticaPage.js';
 
 function App() {
   const [generatedStory, setGeneratedStory] = useState(null);

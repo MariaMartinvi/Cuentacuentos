@@ -1,6 +1,7 @@
 // controllers/storyController.js
 const openaiService = require('../utils/openaiService');
 const { constructPrompt, extractTitle } = require('../utils/helpers');
+console.log("OpenAI API Key:", process.env.OPENAI_API_KEY ? "Configurada (primeros caracteres: " + process.env.OPENAI_API_KEY.substring(0, 5) + "...)" : "No configurada");
 
 exports.generateStory = async (req, res, next) => {
   try {

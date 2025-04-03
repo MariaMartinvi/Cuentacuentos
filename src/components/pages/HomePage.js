@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import StoryForm from '../StoryForm';
-import StoryDisplay from '../StoryDisplay';
+import StoryForm from '../StoryForm.js';
+import { useTranslation } from 'react-i18next'
+import StoryDisplay from '../StoryDisplay.js';
 import '../../styles/global.css';
 
 
 function App() {
   const [generatedStory, setGeneratedStory] = useState(null);
-
+  const { t } = useTranslation();
   const handleStoryGenerated = (story) => {
     setGeneratedStory(story);
 
@@ -27,8 +28,8 @@ function App() {
 
       <div className="hero-section">
         <div className="hero-container">
-         <h1>Niñoooos....¡a dormir!</h1>
-          <p> Crea audiocuentos personalizados y originales en español con solo un clic para a ir a dormir y dale al play. Personaliza el tema con sus historias del día y del cole, el tipo, longitud y edad.</p>
+        <h1>{t('homepage.heroTitle')}</h1>
+        <p>{t('homepage.heroDescription')}</p>
         </div>
       </div>
 
@@ -45,20 +46,20 @@ function App() {
             <div className="features-grid">
               <div className="feature-card">
                 <div className="feature-icon">✨</div>
-                <h3>Historias Únicas</h3>
-                <p>Cada historia generada es completamente única y original, adaptada a tus preferencias.</p>
+                <h3>{t('homepage.uniqueStoriesTitle')}</h3>
+                <p>{t('homepage.uniqueStoriesDescription')}</p>
               </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🎭</div>
-                <h3>Múltiples Géneros</h3>
-                <p>Elige entre diversos géneros: original, clásico, humor, ciencia ficción, terror y más.</p>
+                <h3>{t('homepage.multipleGenresTitle')}</h3>
+                <p>{t('homepage.multipleGenresDescription')}</p>
               </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🔊</div>
-                <h3>Conversión a Audio</h3>
-                <p>Escucha tus historias con nuestra función de texto a voz con voces naturales en español.</p>
+                <h3>{t('homepage.audioConversionTitle')}</h3>
+                <p>{t('homepage.audioConversionDescription')}</p>
               </div>
             </div>
           </div>

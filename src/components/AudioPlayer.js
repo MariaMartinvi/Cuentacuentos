@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function AudioPlayer({ audioUrl }) {
+  const { t } = useTranslation();
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -59,7 +61,7 @@ function AudioPlayer({ audioUrl }) {
   const handleDownloadAudio = () => {
     const link = document.createElement('a');
     link.href = audioUrl;
-    link.download = `historia-audio-${Date.now()}.mp3`;
+    link.download = `${t('audioPlayer.downloadFileName')}-${Date.now()}.mp3`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -71,7 +73,7 @@ function AudioPlayer({ audioUrl }) {
 
       <div className="player-header">
         <div className="player-title">
-          <span className="audio-icon">🔊</span> Audio de tu historia
+          <span className="audio-icon">🔊</span> {t('audioPlayer.title')}
         </div>
       </div>
 
@@ -79,12 +81,12 @@ function AudioPlayer({ audioUrl }) {
         <button
           onClick={togglePlay}
           className="play-pause-btn"
-          aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
+          aria-label={isPlaying ? t('audioPlayer.pause') : t('audioPlayer.play')}
         >
           {isPlaying ? (
-            <>⏸️ Pausar</>
+            <>⏸️ {t('audioPlayer.pause')}</>
           ) : (
-            <>▶️ Reproducir</>
+            <>▶️ {t('audioPlayer.play')}</>
           )}
         </button>
 
@@ -101,7 +103,7 @@ function AudioPlayer({ audioUrl }) {
             min="0"
             max="100"
             step="0.1"
-            aria-label="Progreso de audio"
+            aria-label={t('audioPlayer.progress')}
           />
 
           <div className="time-display duration">
@@ -112,9 +114,9 @@ function AudioPlayer({ audioUrl }) {
         <button
           onClick={handleDownloadAudio}
           className="download-audio-btn"
-          aria-label="Descargar audio"
+          aria-label={t('audioPlayer.download')}
         >
-          ⬇️ Descargar
+          ⬇️ {t('audioPlayer.download')}
         </button>
       </div>
     </div>

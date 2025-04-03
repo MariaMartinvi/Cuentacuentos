@@ -6,10 +6,17 @@ const rateLimit = require('rate-limiter-flexible');
 const dotenv = require('dotenv');
 
 // Load environment variables
-dotenv.config();
+require('dotenv').config({ path: __dirname + '/.env' });
+
+console.log("Variables de entorno cargadas:");
+console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "Configurada" : "No configurada");
+console.log("GOOGLE_TTS_API_KEY:", process.env.GOOGLE_TTS_API_KEY ? "Configurada" : "No configurada");
 
 // Create Express app
-const app = express();
+
+
+console.log("OpenAI API Key configurada:", !!process.env.OPENAI_API_KEY);
+console.log("Google TTS API Key configurada:", !!process.env.GOOGLE_TTS_API_KEY);
 
 // Security middleware
 app.use(helmet());
@@ -24,13 +31,14 @@ app.use(cors({
     // Allow requests with no origin (like mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log(`Origin ${origin} not allowed by CORS`);
+      callback(null, false);
     }
-    return callback(null, true);
   },
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true
 }));
 
@@ -48,6 +56,9 @@ app.use(async (req, res, next) => {
     res.status(429).json({ error: 'Too many requests. Please try again later.' });
   }
 });
+
+// Agregar esto antes de tus rutas para manejar solicitudes OPTIONS
+app.options('*', cors());
 
 // Import route handlers
 const storyRoutes = require('./routes/storyRoutes');

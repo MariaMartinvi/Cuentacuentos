@@ -91,6 +91,24 @@ a {
   color: var(--primary);
 }
 
+.language-button {
+  background: none;
+  border: 1px solid white;
+  color: rgba(34, 33, 33, 0.685);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.language-button:hover {
+  background-color: white;
+  color: #533094;
+}
+.language-button.active-language {
+  color: blue; /* Highlight the active language */
+  border-color: blue; /* Optional: Change the border color */
+  font-weight: bold; /* Optional: Make the active language bold */
+}
 .nav-link::after {
   content: '';
   position: absolute;

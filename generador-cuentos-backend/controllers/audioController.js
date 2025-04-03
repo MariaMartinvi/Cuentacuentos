@@ -26,7 +26,7 @@ exports.generateAudio = async (req, res, next) => {
     
     // Return audio data (base64 encoded)
     res.status(200).json({
-      audioData: audioData,
+      audioUrl: `data:audio/mp3;base64,${audioData}`,
       format: 'mp3',
       parameters: {
         voiceId,

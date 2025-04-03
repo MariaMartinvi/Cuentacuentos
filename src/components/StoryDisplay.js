@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AudioPlayer from './AudioPlayer';
-import { generateAudio } from '../services/audioService';
+import AudioPlayer from './AudioPlayer.js';
+import { generateAudio } from '../services/audioService.js';
 
 function StoryDisplay({ story }) {
   const [audioUrl, setAudioUrl] = useState(null);
@@ -28,13 +28,32 @@ function StoryDisplay({ story }) {
     setIsGeneratingAudio(true);
 
     try {
+      console.log("Solicitando audio para texto:", story.content.substring(0, 50) + "...");
+
       const audioData = await generateAudio({
         text: story.content,
         voiceId: voiceType,
         speechRate: 1.0
       });
 
+      console.log("Respuesta completa del servidor:", audioData);
+    console.log("Tipo de respuesta:", typeof audioData);
+    console.log("Propiedades disponibles:", Object.keys(audioData));
+    
+    if (audioData.audioUrl) {
+      console.log("audioUrl encontrado:", audioData.audioUrl.substring(0, 50) + "...");
       setAudioUrl(audioData.audioUrl);
+    } else if (audioData.audioData) {
+      console.log("audioData encontrado, convirtiendo a URL...");
+      setAudioUrl(`data:audio/mp3;base64,${audioData.audioData}`);
+    } else {
+      console.error("No se encontró audioUrl ni audioData en la respuesta");
+      throw new Error("La respuesta del servidor no contiene datos de audio");
+    }
+
+      setAudioUrl(audioData.audioUrl);
+      console.log("audioUrl establecido en estado:", audioUrl ? "Sí" : "No");
+
     } catch (error) {
       console.error('Error generating audio:', error);
       alert('Hubo un error al generar el audio. Por favor, inténtalo de nuevo.');
@@ -84,6 +103,8 @@ function StoryDisplay({ story }) {
                 <option value="male">Hombre (España)</option>
                 <option value="female-latam">Mujer (Latinoamérica)</option>
                 <option value="male-latam">Hombre (Latinoamérica)</option>
+                <option value="female-english">Mujer Inglés (USA)</option>
+                <option value="male-english">Hombre Inglés (USA)</option>
               </select>
             </div>
 

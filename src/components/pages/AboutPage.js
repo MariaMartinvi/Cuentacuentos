@@ -9,7 +9,7 @@ function AboutPage() {
       <div className="page-header">
         <div className="container">
           <h1>Sobre Nosotros</h1>
-          <p>Conoce más sobre nuestro proyecto y misión</p>
+          <p>El sentido de esta web </p>
         </div>
       </div>
       
@@ -21,20 +21,20 @@ function AboutPage() {
             </div>
             <div className="about-text">
               <h2>Nuestra Historia</h2>
-              <p>El Generador de Cuentos IA nació de la pasión por la narrativa y la tecnología. Creemos que la inteligencia artificial puede ser una poderosa herramienta para potenciar la creatividad humana, no reemplazarla.</p>
-              <p>Fundado en 2023, nuestro proyecto busca democratizar la creación literaria, permitiendo que cualquier persona, independientemente de su experiencia previa, pueda generar historias cautivadoras en español.</p>
+              <p>Estamos aprendiendo a generar webs y apps con diferentes editores.</p>
+              <p>Arrancamos en abril de 2025 y tenemos muchas ideas en mente. Si alguien tiene una propuesta, por favor, enviar al formulario de contacto.</p>
               
-              <h2>Nuestra Misión</h2>
-              <p>Nuestra misión es inspirar la creatividad y fomentar el amor por la narración a través de la tecnología. Queremos que nuestras herramientas ayuden a:</p>
+              <h2>Nuestra Idea</h2>
+              <p>Nuestra idea es aprender e inspirar la creatividad y fomentar el amor por  la tecnología. Queremos que nuestras herramientas ayuden a:</p>
               <ul>
-                <li>Educadores que buscan material didáctico personalizado</li>
+          
                 <li>Padres que desean historias únicas para sus hijos</li>
-                <li>Escritores que buscan inspiración para superar el bloqueo creativo</li>
+                <li>Niños que quieren probar nuevas herramientas</li>
                 <li>Entusiastas de la tecnología interesados en el potencial de la IA</li>
               </ul>
               
               <h2>Tecnología</h2>
-              <p>Utilizamos modelos avanzados de inteligencia artificial, específicamente diseñados para comprender y generar texto en español con matices culturales y lingüísticos apropiados. Nuestro sistema está en constante evolución para ofrecer historias cada vez más coherentes, creativas y personalizadas.</p>
+              <p>Utilizamos modelos avanzados de inteligencia artificial, específicamente diseñados para comprender y generar texto en español con matices culturales y lingüísticos apropiados. Nuestro sistema está en constante evolución para ofrecer historias cada vez más coherentes y personalizadas.</p>
             </div>
           </div>
         </div>
@@ -46,30 +46,13 @@ function AboutPage() {
           <div className="team-grid">
             <div className="team-member">
               <div className="member-photo">
-                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="María López" />
+                <img src="https://www.kissfm.es/wp-content/uploads/2023/01/raw-pixel.jpg" alt="María López" />
               </div>
-              <h3>María López</h3>
+              <h3>Eva Martín</h3>
               <p className="member-role">Fundadora & CEO</p>
-              <p>Apasionada por la intersección entre tecnología y creatividad.</p>
+              <p>Con ganas de aprender.</p>
             </div>
             
-            <div className="team-member">
-              <div className="member-photo">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez" />
-              </div>
-              <h3>Carlos Rodríguez</h3>
-              <p className="member-role">CTO</p>
-              <p>Experto en inteligencia artificial y procesamiento de lenguaje natural.</p>
-            </div>
-            
-            <div className="team-member">
-              <div className="member-photo">
-                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana Martínez" />
-              </div>
-              <h3>Ana Martínez</h3>
-              <p className="member-role">Directora Creativa</p>
-              <p>Escritora con amplia experiencia en narrativa digital y tradicional.</p>
-            </div>
           </div>
         </div>
       </div>

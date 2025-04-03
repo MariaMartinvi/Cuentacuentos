@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { generateStory } from '../services/storyService';
+import { useTranslation } from 'react-i18next';
+import { generateStory } from '../services/storyService.js';
 
 function StoryForm({ onStoryGenerated }) {
+  const { t, i18n } = useTranslation();
   const [topic, setTopic] = useState('');
-  const [storyLength, setStoryLength] = useState('medio');
+  const [storyLength, setStoryLength] = useState('medium');
   const [storyType, setStoryType] = useState('original');
-  const [creativityLevel, setCreativityLevel] = useState('innovador');
-  const [ageGroup, setAgeGroup] = useState('predeterminado');
+  const [creativityLevel, setCreativityLevel] = useState('innovative');
+  const [ageGroup, setAgeGroup] = useState('default');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!topic.trim()) {
-      alert('Por favor, introduce un tema para la historia');
+      alert(t('storyForm.alertTopicRequired'));
       return;
     }
 
@@ -26,12 +28,13 @@ function StoryForm({ onStoryGenerated }) {
         storyType,
         creativityLevel,
         ageGroup,
+        language: i18n.language // Añadir el idioma actual
       });
 
       onStoryGenerated(generatedStory);
     } catch (error) {
       console.error('Error generating story:', error);
-      alert('Hubo un error al generar la historia. Por favor, inténtalo de nuevo.');
+      alert(t('storyForm.alertError'));
     } finally {
       setIsLoading(false);
     }
@@ -39,10 +42,10 @@ function StoryForm({ onStoryGenerated }) {
 
   const handleReset = () => {
     setTopic('');
-    setStoryLength('medio');
+    setStoryLength('medium');
     setStoryType('original');
-    setCreativityLevel('innovador');
-    setAgeGroup('predeterminado');
+    setCreativityLevel('innovative');
+    setAgeGroup('default');
     onStoryGenerated(null);
   };
 
@@ -50,19 +53,19 @@ function StoryForm({ onStoryGenerated }) {
     <div className="story-form-container">
       <h2>
         <span className="icon-title">🦉</span>
-        Mi Cuenta Cuentos
+        {t('storyForm.title')}
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="topic">
-            <span className="form-icon">📝</span> Introduce un tema
+            <span className="form-icon">📝</span> {t('storyForm.topicLabel')}
           </label>
           <input
             type="text"
             id="topic"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="Ej: Un viaje a la luna, Aventuras en el bosque..."
+            placeholder={t('storyForm.topicPlaceholder')}
             required
           />
         </div>
@@ -70,35 +73,35 @@ function StoryForm({ onStoryGenerated }) {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="storyLength">
-              <span className="form-icon">📏</span> Duración de la historia
+              <span className="form-icon">📏</span> {t('storyForm.lengthLabel')}
             </label>
             <select
               id="storyLength"
               value={storyLength}
               onChange={(e) => setStoryLength(e.target.value)}
             >
-              <option value="corto">Corto</option>
-              <option value="medio">Medio</option>
-              <option value="largo">Largo</option>
+              <option value="short">{t('storyForm.lengthShort')}</option>
+              <option value="medium">{t('storyForm.lengthMedium')}</option>
+              <option value="long">{t('storyForm.lengthLong')}</option>
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="storyType">
-              <span className="form-icon">📚</span> Tipo de historia
+              <span className="form-icon">📚</span> {t('storyForm.typeLabel')}
             </label>
             <select
               id="storyType"
               value={storyType}
               onChange={(e) => setStoryType(e.target.value)}
             >
-              <option value="original">Original</option>
-              <option value="clasico">Clásico</option>
-              <option value="humor">Humor</option>
-              <option value="ciencia-ficcion">Ciencia Ficción</option>
-              <option value="terror">Terror</option>
-              <option value="aventura">Aventura</option>
-              <option value="fantasia">Fantasía</option>
+              <option value="original">{t('storyForm.typeOriginal')}</option>
+              <option value="classic">{t('storyForm.typeClassic')}</option>
+              <option value="humor">{t('storyForm.typeHumor')}</option>
+              <option value="sci-fi">{t('storyForm.typeSciFi')}</option>
+              <option value="horror">{t('storyForm.typeHorror')}</option>
+              <option value="adventure">{t('storyForm.typeAdventure')}</option>
+              <option value="fantasy">{t('storyForm.typeFantasy')}</option>
             </select>
           </div>
         </div>
@@ -106,36 +109,36 @@ function StoryForm({ onStoryGenerated }) {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="creativityLevel">
-              <span className="form-icon">💡</span> Nivel de creatividad
+              <span className="form-icon">💡</span> {t('storyForm.creativityLabel')}
             </label>
             <select
               id="creativityLevel"
               value={creativityLevel}
               onChange={(e) => setCreativityLevel(e.target.value)}
             >
-              <option value="innovador">Innovador</option>
-              <option value="imaginativo">Imaginativo</option>
-              <option value="visionario">Visionario</option>
-              <option value="conservador">Conservador</option>
-              <option value="inspirado">Inspirado</option>
+              <option value="innovative">{t('storyForm.creativityInnovative')}</option>
+              <option value="imaginative">{t('storyForm.creativityImaginative')}</option>
+              <option value="visionary">{t('storyForm.creativityVisionary')}</option>
+              <option value="conservative">{t('storyForm.creativityConservative')}</option>
+              <option value="inspired">{t('storyForm.creativityInspired')}</option>
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="ageGroup">
-              <span className="form-icon">👥</span> Grupo de edad
+              <span className="form-icon">👥</span> {t('storyForm.ageLabel')}
             </label>
             <select
               id="ageGroup"
               value={ageGroup}
               onChange={(e) => setAgeGroup(e.target.value)}
             >
-              <option value="predeterminado">Predeterminado</option>
-              <option value="3-6">3-6 años</option>
-              <option value="7-13">7-13 años</option>
-              <option value="13-20">13-20 años</option>
-              <option value="21-35">21-35 años</option>
-              <option value="35+">35+ años</option>
+              <option value="default">{t('storyForm.ageDefault')}</option>
+              <option value="3-6">{t('storyForm.age3to6')}</option>
+              <option value="7-13">{t('storyForm.age7to13')}</option>
+              <option value="13-20">{t('storyForm.age13to20')}</option>
+              <option value="21-35">{t('storyForm.age21to35')}</option>
+              <option value="35+">{t('storyForm.age35plus')}</option>
             </select>
           </div>
         </div>
@@ -144,16 +147,16 @@ function StoryForm({ onStoryGenerated }) {
           <button type="submit" className="generate-btn" disabled={isLoading}>
             {isLoading ? (
               <>
-                <span className="spinner"></span> Generando...
+                <span className="spinner"></span> {t('storyForm.generating')}
               </>
             ) : (
               <>
-                <span className="btn-icon">✨</span> Generar Historia
+                <span className="btn-icon">✨</span> {t('storyForm.generateButton')}
               </>
             )}
           </button>
           <button type="button" className="reset-btn" onClick={handleReset}>
-            Empezar de nuevo
+            {t('storyForm.resetButton')}
           </button>
         </div>
       </form>

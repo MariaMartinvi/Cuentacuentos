@@ -6,12 +6,19 @@ exports.generateCompletion = async (prompt, storyParams) => {
     const maxTokens = getMaxTokens(storyParams.length);
     const temperature = getTemperature(storyParams.creativityLevel);
     
+    console.log('storyParams recibidos:', JSON.stringify(storyParams));
+
+    // Usar el idioma si está disponible, o usar español por defecto
+    const systemMessage = storyParams.language === 'en' 
+      ? 'You are a creative story writer in English. Create original, coherent and captivating stories.'
+      : 'Eres un creativo escritor de cuentos en español. Crea historias originales, coherentes y cautivadoras.';
+    
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: 'Eres un creativo escritor de cuentos en español. Crea historias originales, coherentes y cautivadoras.'
+          content: systemMessage
         },
         {
           role: 'user',
@@ -47,21 +54,41 @@ exports.generateCompletion = async (prompt, storyParams) => {
 
 // Helper functions to determine parameters based on user selections
 function getMaxTokens(length) {
-  switch (length) {
-    case 'corto': return 400;
-    case 'medio': return 800;
-    case 'largo': return 1600;
-    default: return 800;
+  // Manejar tanto valores en español como en inglés
+  switch (length?.toLowerCase()) {
+    case 'short': 
+    case 'corto': 
+      return 400;
+    case 'medium': 
+    case 'medio': 
+      return 800;
+    case 'long': 
+    case 'largo': 
+      return 1600;
+    default: 
+      return 800;
   }
 }
 
 function getTemperature(creativityLevel) {
-  switch (creativityLevel) {
-    case 'conservador': return 0.5;
-    case 'innovador': return 0.7;
-    case 'imaginativo': return 0.8;
-    case 'visionario': return 0.9;
-    case 'inspirado': return 1.0;
-    default: return 0.7;
+  // Manejar tanto valores en español como en inglés
+  switch (creativityLevel?.toLowerCase()) {
+    case 'conservative':
+    case 'conservador': 
+      return 0.5;
+    case 'innovative':
+    case 'innovador': 
+      return 0.7;
+    case 'imaginative':
+    case 'imaginativo': 
+      return 0.8;
+    case 'visionary':
+    case 'visionario': 
+      return 0.9;
+    case 'inspired':
+    case 'inspirado': 
+      return 1.0;
+    default: 
+      return 0.7;
   }
 }

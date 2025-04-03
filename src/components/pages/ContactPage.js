@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import '../../styles/contact.css';
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8916688102365664"
-     crossorigin="anonymous"></script>
+
 function ContactPage() {
   const form = useRef();
 
@@ -32,8 +31,12 @@ function ContactPage() {
 
   return (
     <div className="contact-page">
-      <h1>Contacto</h1>
-      <p>¡Nos encantaría saber de ti! Por favor, completa el formulario a continuación:</p>
+    <div className="page-header">
+        <div className="container">
+          <h1>Contacta</h1>
+          <p>Esperamos saber de tí, escríbenos.Todas las ideas son bienvenidas.</p>
+        </div>
+      </div>
       <form ref={form} onSubmit={sendEmail} className="contact-form">
         <div className="form-group">
           <label htmlFor="name">Nombre:</label>

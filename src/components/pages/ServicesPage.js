@@ -4,11 +4,13 @@ import '../../styles/services.css';
 function ServicesPage() {
   return (
     <div className="page services-page">
-      <h1 className="page-title">Nuestros Servicios</h1>
-      <p className="page-description">
-        Descubre nuestras soluciones creativas impulsadas por inteligencia artificial. Personaliza, genera y disfruta de contenido único.
-      </p>
-
+      <div className="page-header">
+        <div className="container">
+          <h1>Nuestros Servicios</h1>
+          <p>Descubre nuestras soluciones creativas impulsadas por inteligencia artificial. Personaliza, genera y disfruta de contenido único.</p>
+        </div>
+      </div>
+  
       <div className="services-grid">
         <div className="service-card">
           <div className="service-icon">📚</div>

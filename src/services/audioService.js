@@ -1,39 +1,46 @@
-export const generateAudio = async (audioParams) => {
+// audioService.js
+
+
+export const generateAudio = async (options) => {
   try {
-    const response = await fetch('/.netlify/functions/generate-audio', {
+    // Extraer propiedades del objeto de opciones
+    const { text, voiceId, speechRate } = options;
+    
+    // Verificar que text sea un string válido
+    if (typeof text !== 'string') {
+      console.error('Error: el texto no es una cadena válida', text);
+      throw new Error('El texto para generar audio debe ser una cadena');
+    }
+
+    console.log('Iniciando generación de audio con texto:', text.substring(0, 50) + '...');
+    console.log('Usando voz:', voiceId);
+    
+    // Determinar la URL correcta basada en el entorno
+    const isProduction = window.location.hostname !== 'localhost';
+    const audioFunctionUrl = isProduction 
+      ? '/.netlify/functions/generate-audio'  // URL para producción en Netlify
+      : 'http://localhost:5000/api/audio/generate';  // URL para desarrollo local
+
+    console.log('Llamando a función en:', audioFunctionUrl);
+
+    const response = await fetch(audioFunctionUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(audioParams)
+      body: JSON.stringify({ text, voiceId, speechRate }),
     });
-    
+
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to generate audio');
+      const errorText = await response.text();
+      console.error('Error response:', errorText);
+      throw new Error('Error al generar el audio: ' + errorText);
     }
-    
+
     const data = await response.json();
-    
-    // Convert base64 to blob and create URL
-    const audioContent = data.audioContent;
-    const byteCharacters = atob(audioContent);
-    const byteNumbers = new Array(byteCharacters.length);
-    
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: 'audio/mp3' });
-    const audioUrl = URL.createObjectURL(blob);
-    
-    return {
-      audioUrl,
-      parameters: data.parameters
-    };
+    return data;
   } catch (error) {
-    console.error('Error generating audio:', error);
-    throw error;
+    console.error('Error generando audio:', error);
+    throw new Error(error.message || 'Error desconocido al generar audio');
   }
 };
