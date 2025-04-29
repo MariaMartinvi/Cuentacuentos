@@ -2,84 +2,133 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const rateLimit = require('rate-limiter-flexible');
-const dotenv = require('dotenv');
+const rateLimit = require('express-rate-limit');
+const mongoose = require('mongoose');
+const storyRoutes = require('./routes/storyRoutes');
+const authRoutes = require('./routes/authRoutes');
+const stripeRoutes = require('./routes/stripeRoutes');
+const audioRoutes = require('./routes/audioRoutes');
 
-// Load environment variables
+// Load environment variables once
 require('dotenv').config({ path: __dirname + '/.env' });
-
-console.log("Variables de entorno cargadas:");
-console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "Configurada" : "No configurada");
-console.log("GOOGLE_TTS_API_KEY:", process.env.GOOGLE_TTS_API_KEY ? "Configurada" : "No configurada");
-
+// Log all registered routes
+app._router.stack.forEach(middleware => {
+  if (middleware.route) {
+    console.log(`Route: ${Object.keys(middleware.route.methods)} ${middleware.route.path}`);
+  } else if (middleware.name === 'router') {
+    middleware.handle.stack.forEach(handler => {
+      if (handler.route) {
+        const path = handler.route.path;
+        const method = Object.keys(handler.route.methods)[0].toUpperCase();
+        console.log(`Route: ${method} ${path}`);
+      }
+    });
+  }
+});
 // Create Express app
+const app = express();
+// Log all registered routes
+app._router.stack.forEach(middleware => {
+  if (middleware.route) {
+    console.log(`Route: ${Object.keys(middleware.route.methods)} ${middleware.route.path}`);
+  } else if (middleware.name === 'router') {
+    middleware.handle.stack.forEach(handler => {
+      if (handler.route) {
+        const path = handler.route.path;
+        const method = Object.keys(handler.route.methods)[0].toUpperCase();
+        console.log(`Route: ${method} ${path}`);
+      }
+    });
+  }
+});
+// Middleware
+app.use((req, res, next) => {
+  if (req.originalUrl === '/api/stripe/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
+app.use(express.urlencoded({ extended: true }));
 
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  family: 4
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch(err => {
+  console.error('MongoDB connection error:', err);
+  process.exit(1);
+});
 
-console.log("OpenAI API Key configurada:", !!process.env.OPENAI_API_KEY);
-console.log("Google TTS API Key configurada:", !!process.env.GOOGLE_TTS_API_KEY);
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5000',
+  'http://localhost:5001',
+  'https://cuentacuentosfront.onrender.com',
+  'https://www.micuentacuentos.com',
+  'https://micuentacuentosfront.onrender.com'
+];
 
-// Security middleware
-app.use(helmet());
-
-// Parse JSON bodies
-app.use(express.json({ limit: '1mb' }));
-
-// Configure CORS
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.log(`Origin ${origin} not allowed by CORS`);
-      callback(null, false);
+      callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
+}));
+
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: { policy: "unsafe-none" }
 }));
 
 // Rate limiting
-const apiLimiter = new rateLimit.RateLimiterMemory({
-  points: 10, // Number of requests
-  duration: 60, // Per minute
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
+app.use(limiter);
 
-app.use(async (req, res, next) => {
-  try {
-    await apiLimiter.consume(req.ip);
-    next();
-  } catch (error) {
-    res.status(429).json({ error: 'Too many requests. Please try again later.' });
-  }
-});
-
-// Agregar esto antes de tus rutas para manejar solicitudes OPTIONS
-app.options('*', cors());
-
-// Import route handlers
-const storyRoutes = require('./routes/storyRoutes');
-const audioRoutes = require('./routes/audioRoutes');
-
-// Apply routes
+// Routes
+console.log('Registering routes...');
 app.use('/api/stories', storyRoutes);
+console.log('Story routes registered');
+app.use('/api/auth', authRoutes);
+console.log('Auth routes registered');
+app.use('/api/stripe', stripeRoutes);
+console.log('Stripe routes registered');
 app.use('/api/audio', audioRoutes);
+console.log('Audio routes registered');
+
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ 
-    error: 'An internal server error occurred',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
+  res.status(500).json({ error: 'Something went wrong!' });
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`API URL: http://localhost:${PORT}/api`);
 });
